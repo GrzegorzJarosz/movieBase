@@ -29,6 +29,14 @@ const app = express();
 //body-parser
 app.use(bodyParser.json());
 
+//def routes
+const movies = require('./routes/movies');
+const comments = require('./routes/comments');
+
+//
+app.use('/movies', movies);
+app.use('/comments', comments);
+
 //index route
 app.get('/', (req,res)=>{
   res.send('use /movie or /comment endpoint');
