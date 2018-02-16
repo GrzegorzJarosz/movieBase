@@ -1,5 +1,5 @@
 const Request = require("request");
-const apiKey = require('./config/key');
+const apiKey = require('../config/key');
 
 /*
 {key:'xxxxxxxxx'}

@@ -38,10 +38,36 @@ module.exports.getMovies=function(callback){
 };
 
 /*----------------------------------------------------------*/
+/*
+sort by title
+s=u increase
+s=d decrease
 
-//get all sorted
-module.exports.getMoviesSorted= function(param, callback){
-  Movie.find(callback).sort({"Title":param});
+category
+c=categoryName
+
+*/
+//get movies with params
+module.exports.getMoviesSorted= function(p, callback){
+	let param=p;
+	let findDetails={};
+	let sortRule;
+
+	if(param.c){
+		findDetails={'Genre':new RegExp(param.c,"i")};
+	}
+
+	if(param.s){
+		if(param.s=='d'){
+			sortRule=-1;
+		}else{
+			sortRule=1;
+		}
+	}else{
+		sortRule=1;
+	}
+
+	Movie.find(findDetails,callback).sort({"Title":sortRule});
 };
 
 /*----------------------------------------------------------*/

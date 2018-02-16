@@ -5,14 +5,28 @@ const Movie  = require('../models/movie');
 const remote = require('../ext/remote');
 
 /*-----------------------get-----------------------------------*/
+
 router.get('/',(req,res)=>{
-	Movie.getMovies((err,movies)=>{
-		if(err){
-			throw err;
-			console.log(err);
-		}
-		res.json(movies);
-	});
+
+	let filter=req.query;
+
+	if(filter.s || filter.c){
+		Movie.getMoviesSorted(filter,(err,movies)=>{
+			if(err){
+				throw err;
+				console.log(err);
+			}
+			res.json(movies);
+		});
+	}else{
+		Movie.getMovies((err,movies)=>{
+			if(err){
+				throw err;
+				console.log(err);
+			}
+			res.json(movies);
+		});
+	}
 });
 
 /*-----------------------post-----------------------------------*/
@@ -36,7 +50,7 @@ router.post('/',(req,res)=>{
 					}else{
 								Movie.addMovie(JSON.parse(body), (err,body)=>{
 									if(err){console.log(err);throw err;}
-									res.json(body);
+									res.json({success:true, body});
 								});
 					}
 				}).catch((er)=>{
