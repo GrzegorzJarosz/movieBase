@@ -38,3 +38,23 @@ module.exports.getMovies=function(callback){
 };
 
 /*----------------------------------------------------------*/
+
+//get all sorted
+module.exports.getMoviesSorted= function(param, callback){
+  Movie.find(callback).sort({"Title":param});
+};
+
+/*----------------------------------------------------------*/
+
+//find by name
+module.exports.getMovieByName= function(title,callback){
+  Movie.find({'Title': new RegExp(`^${title}$`,"i") }, callback);
+};
+
+/*----------------------------------------------------------*/
+
+
+//add movie
+module.exports.addMovie= function(movie, callback){
+  Movie.create(movie, callback);
+}
