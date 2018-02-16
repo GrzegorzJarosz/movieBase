@@ -31,3 +31,10 @@ var MovieSchema = new Schema({
 const Movie = module.exports = mongoose.model('Movie', MovieSchema);
 
 /*----------------------------------------------------------*/
+
+//get movies / all
+module.exports.getMovies=function(callback){
+  Movie.find(callback);
+};
+
+/*----------------------------------------------------------*/

@@ -10,3 +10,10 @@ const Schema = mongoose.Schema;
 const Comment = module.exports = mongoose.model('Comment', CommentSchema);
 
 /*----------------------------------------------------------------------*/
+
+//get comments / all
+module.exports.getComments=function(callback){
+  Comment.find(callback);
+  
+};
+/*----------------------------------------------------------------------*/
