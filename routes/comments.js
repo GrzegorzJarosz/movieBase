@@ -37,7 +37,7 @@ router.post('/',(req,res)=>{
 				throw err;
 				console.log(err);
 			}
-			res.json(req.body);
+			res.json({success:true, data})
 		});
 	}else{
 		res.json({success:false,msg:'invalid req..'})

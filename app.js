@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./config/database');
 
@@ -28,6 +29,9 @@ const app = express();
 
 //body-parser
 app.use(bodyParser.json());
+
+//cors
+app.use(cors());
 
 //def routes
 const movies = require('./routes/movies');
