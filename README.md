@@ -49,9 +49,9 @@ Query with, or without parameters:
 fetch list of all movies already present in the application database
 
 * with params:
-fetch list of movies:
-```s=u```   sorted by title, ascending
-```s=d```   sorted by title, descending
+fetch list of movies:  
+```s=u```   sorted by title, ascending  
+```s=d```   sorted by title, descending  
 
 ```c=categoryName``` list of the movies matching the given category
 
