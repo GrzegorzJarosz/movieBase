@@ -11,18 +11,12 @@ router.get('/',(req,res)=>{
 
 	if(filter){
 		Comment.getCommentsByMovieId(filter,(err,datax)=>{
-			if(err){
-				throw err;
-				console.log(err);
-			}
+			if(err){res.send(err);}
 			res.json(datax);
 		});
 	}else{
 		Comment.getComments((err,dataz)=>{
-			if(err){
-				throw err;
-				console.log(err);
-			}
+			if(err){res.send(err);}
 			res.json(dataz);
 		});
 	}
@@ -33,14 +27,11 @@ router.get('/',(req,res)=>{
 router.post('/',(req,res)=>{
 	if(req.body.movie_id && req.body.comment){
 		Comment.addComment(req.body, (err,data)=>{
-			if(err){
-				throw err;
-				console.log(err);
-			}
+			if(err){res.send(err);}
 			res.json({success:true, data})
 		});
 	}else{
-		res.json({success:false,msg:'invalid req..'})
+		res.status(400).send('invalid req');
 	}
 });
 

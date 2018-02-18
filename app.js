@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -22,7 +21,7 @@ mongoose.connection.on('error',(err)=>{
 /*------------------------------------------------------------------*/
 
 //port number
-const port = 3000;
+const port = process.env.PORT || 8080;
 
 //app
 const app = express();

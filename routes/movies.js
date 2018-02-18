@@ -12,18 +12,12 @@ router.get('/',(req,res)=>{
 
 	if(filter.s || filter.c){
 		Movie.getMoviesSorted(filter,(err,movies)=>{
-			if(err){
-				throw err;
-				console.log(err);
-			}
+			if(err){res.send(err);}
 			res.json(movies);
 		});
 	}else{
 		Movie.getMovies((err,movies)=>{
-			if(err){
-				throw err;
-				console.log(err);
-			}
+			if(err){res.send(err);}
 			res.json(movies);
 		});
 	}
@@ -35,33 +29,29 @@ router.post('/',(req,res)=>{
 	if(movReq.movieTitle){//valid if post empty
 
 		Movie.getMovieByName(movReq.movieTitle, (err,data)=>{
-			if(err){
-				throw err;
-				console.log(err);
-			}
+			if(err){res.send(err);}
 			if(data.length>0){//validation -if- exist in db
-				res.json({success:false, msg:`movie ${movReq.movieTitle} is already exist`});
+				res.status(409).send(`movie ${movReq.movieTitle} is already exist`);
 			}
 			if(data.length==0){//validation -if- not exist in db
 			//get-movie-remote----------->
 				remote.getMovieRemote(movReq.movieTitle).then((body)=>{
 					if(JSON.parse(body).Response=="False"){
-						res.json({success:false, msg:'movie not found..'});
+						res.status(204).send('movie not found');
 					}else{
 								Movie.addMovie(JSON.parse(body), (err,body)=>{
-									if(err){console.log(err);throw err;}
-									res.json({success:true, body});
+									if(err){res.send(err);}
+									res.send(body);
 								});
 					}
 				}).catch((er)=>{
-					res.json({success:false, msg:'some problems..'});
-					console.log(er);
+					res.status(500).send('some problems with external api / code:'+er.code);
 				});
 			// <-----------get-movie-remote
 			}
 		});
 	}else{
-		res.json({success:false, msg:'movie title is required!'})
+		res.status(400).send('movie title is required');
 	}
 });
 
