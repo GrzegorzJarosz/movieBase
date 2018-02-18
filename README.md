@@ -15,7 +15,7 @@ REST API based movie database interacting with an external service API: http://w
 
 ### POST /movies
 Based on a given title the movie details are fetched from the remote service and saved to the application database.
-Request body shape:
+Request body:
 ```
 {"movieTitle":"braveheart"}
 ```
