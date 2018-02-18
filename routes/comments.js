@@ -28,7 +28,7 @@ router.post('/',(req,res)=>{
 	if(req.body.movie_id && req.body.comment){
 		Comment.addComment(req.body, (err,data)=>{
 			if(err){res.send(err);}
-			res.json({success:true, data})
+			res.send(data);
 		});
 	}else{
 		res.status(400).send('invalid req');
