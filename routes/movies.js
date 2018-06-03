@@ -1,6 +1,5 @@
 const express = require ('express');
 const router = express.Router();
-const config = require('../config/database');
 const Movie  = require('../models/movie');
 const remote = require('../ext/remote');
 

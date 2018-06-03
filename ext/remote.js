@@ -1,5 +1,4 @@
 const Request = require("request");
-const apiKey = require('../config/key');
 
 /*
 {key:'xxxxxxxxx'}
@@ -7,7 +6,7 @@ const apiKey = require('../config/key');
 
 //getMovieRemote
 module.exports.getMovieRemote = function(title){
-	let url=`http://www.omdbapi.com/?t=${title}&apikey=${apiKey.key}`;
+	let url=`http://www.omdbapi.com/?t=${title}&apikey=${process.env.key}`;
 
 	return new Promise(function(res, rej){
 

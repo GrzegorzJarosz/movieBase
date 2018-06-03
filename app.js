@@ -2,15 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const config = require('./config/database');
+const morgan = require('morgan');
+require('dotenv').config()
 
 /*-----------------db connection----------------------------------*/
 //connect to db
-mongoose.connect(config.database);
+mongoose.connect(process.env.database);
 
 //on connection
 mongoose.connection.on('connected',()=>{
-  console.log('connected to database '+config.database);
+  console.log('connected to database '+process.env.database);
 });
 
 //on error
@@ -25,6 +26,10 @@ const port = process.env.PORT || 8080;
 
 //app
 const app = express();
+
+//morgan
+app.use(morgan('dev'));
+
 
 //body-parser
 app.use(bodyParser.json());
