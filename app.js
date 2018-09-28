@@ -8,12 +8,10 @@ require('dotenv').config()
 /*-----------------db connection----------------------------------*/
 //connect to db
 mongoose.connect(process.env.database);
-
 //on connection
 mongoose.connection.on('connected',()=>{
   console.log('connected to database '+process.env.database);
 });
-
 //on error
 mongoose.connection.on('error',(err)=>{
   console.log('database erro '+err);
@@ -30,7 +28,6 @@ const app = express();
 //morgan
 app.use(morgan('dev'));
 
-
 //body-parser
 app.use(bodyParser.json());
 
@@ -41,7 +38,7 @@ app.use(cors());
 const movies = require('./routes/movies');
 const comments = require('./routes/comments');
 
-//
+//use routes
 app.use('/movies', movies);
 app.use('/comments', comments);
 
